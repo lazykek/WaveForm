@@ -7,23 +7,35 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3B09930127FCD39A0041013E /* WaveFormDisplayable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B09930027FCD39A0041013E /* WaveFormDisplayable.swift */; };
+		3B09930427FCDF3B0041013E /* CGPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B09930327FCDF3B0041013E /* CGPoint.swift */; };
+		3B09930D27FDDD6C0041013E /* AudioReceiverDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B09930C27FDDD6C0041013E /* AudioReceiverDelegate.swift */; };
+		3B09930F27FDDD880041013E /* RawAudioDataReceiverDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B09930E27FDDD880041013E /* RawAudioDataReceiverDelegate.swift */; };
+		3B3B423327446872004510DE /* WaveFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B3B423227446872004510DE /* WaveFormView.swift */; };
+		3B838C6228001DFA005271FA /* DatasetProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B838C6128001DFA005271FA /* DatasetProvider.swift */; };
 		3BAAFA8827353958008D6041 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BAAFA8727353958008D6041 /* AppDelegate.swift */; };
 		3BAAFA8A27353958008D6041 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BAAFA8927353958008D6041 /* SceneDelegate.swift */; };
-		3BAAFA8C27353958008D6041 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BAAFA8B27353958008D6041 /* ViewController.swift */; };
-		3BAAFA8F27353958008D6041 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3BAAFA8D27353958008D6041 /* Main.storyboard */; };
+		3BAAFA8C27353958008D6041 /* RecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BAAFA8B27353958008D6041 /* RecordViewController.swift */; };
 		3BAAFA9127353959008D6041 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3BAAFA9027353959008D6041 /* Assets.xcassets */; };
 		3BAAFA9427353959008D6041 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3BAAFA9227353959008D6041 /* LaunchScreen.storyboard */; };
+		3BAAFA9C27353A53008D6041 /* RawAudioProviderAndWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BAAFA9B27353A53008D6041 /* RawAudioProviderAndWriter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3B09930027FCD39A0041013E /* WaveFormDisplayable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveFormDisplayable.swift; sourceTree = "<group>"; };
+		3B09930327FCDF3B0041013E /* CGPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGPoint.swift; sourceTree = "<group>"; };
+		3B09930C27FDDD6C0041013E /* AudioReceiverDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioReceiverDelegate.swift; sourceTree = "<group>"; };
+		3B09930E27FDDD880041013E /* RawAudioDataReceiverDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RawAudioDataReceiverDelegate.swift; sourceTree = "<group>"; };
+		3B3B423227446872004510DE /* WaveFormView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaveFormView.swift; sourceTree = "<group>"; };
+		3B838C6128001DFA005271FA /* DatasetProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatasetProvider.swift; sourceTree = "<group>"; };
 		3BAAFA8427353958008D6041 /* RightWaveForm.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RightWaveForm.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3BAAFA8727353958008D6041 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3BAAFA8927353958008D6041 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		3BAAFA8B27353958008D6041 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		3BAAFA8E27353958008D6041 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		3BAAFA8B27353958008D6041 /* RecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordViewController.swift; sourceTree = "<group>"; };
 		3BAAFA9027353959008D6041 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3BAAFA9327353959008D6041 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3BAAFA9527353959008D6041 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3BAAFA9B27353A53008D6041 /* RawAudioProviderAndWriter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RawAudioProviderAndWriter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -37,6 +49,65 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3B09930627FD77710041013E /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				3B09930327FCDF3B0041013E /* CGPoint.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		3B09930727FD77790041013E /* WaveFormView */ = {
+			isa = PBXGroup;
+			children = (
+				3B3B423227446872004510DE /* WaveFormView.swift */,
+			);
+			path = WaveFormView;
+			sourceTree = "<group>";
+		};
+		3B09930827FD778B0041013E /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				3BAAFA8B27353958008D6041 /* RecordViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		3B09930927FD77960041013E /* App */ = {
+			isa = PBXGroup;
+			children = (
+				3BAAFA8727353958008D6041 /* AppDelegate.swift */,
+				3BAAFA8927353958008D6041 /* SceneDelegate.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		3B09930A27FDC83C0041013E /* AudioAnalyzerAndWriter */ = {
+			isa = PBXGroup;
+			children = (
+				3BAAFA9B27353A53008D6041 /* RawAudioProviderAndWriter.swift */,
+			);
+			path = AudioAnalyzerAndWriter;
+			sourceTree = "<group>";
+		};
+		3B09930B27FDDD1F0041013E /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				3B09930027FCD39A0041013E /* WaveFormDisplayable.swift */,
+				3B09930C27FDDD6C0041013E /* AudioReceiverDelegate.swift */,
+				3B09930E27FDDD880041013E /* RawAudioDataReceiverDelegate.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		3B838C6028001D26005271FA /* DatasetProvider */ = {
+			isa = PBXGroup;
+			children = (
+				3B838C6128001DFA005271FA /* DatasetProvider.swift */,
+			);
+			path = DatasetProvider;
+			sourceTree = "<group>";
+		};
 		3BAAFA7B27353957008D6041 = {
 			isa = PBXGroup;
 			children = (
@@ -56,10 +127,13 @@
 		3BAAFA8627353958008D6041 /* RightWaveForm */ = {
 			isa = PBXGroup;
 			children = (
-				3BAAFA8727353958008D6041 /* AppDelegate.swift */,
-				3BAAFA8927353958008D6041 /* SceneDelegate.swift */,
-				3BAAFA8B27353958008D6041 /* ViewController.swift */,
-				3BAAFA8D27353958008D6041 /* Main.storyboard */,
+				3B838C6028001D26005271FA /* DatasetProvider */,
+				3B09930B27FDDD1F0041013E /* Protocols */,
+				3B09930927FD77960041013E /* App */,
+				3B09930827FD778B0041013E /* ViewController */,
+				3B09930A27FDC83C0041013E /* AudioAnalyzerAndWriter */,
+				3B09930727FD77790041013E /* WaveFormView */,
+				3B09930627FD77710041013E /* Extensions */,
 				3BAAFA9027353959008D6041 /* Assets.xcassets */,
 				3BAAFA9227353959008D6041 /* LaunchScreen.storyboard */,
 				3BAAFA9527353959008D6041 /* Info.plist */,
@@ -126,7 +200,6 @@
 			files = (
 				3BAAFA9427353959008D6041 /* LaunchScreen.storyboard in Resources */,
 				3BAAFA9127353959008D6041 /* Assets.xcassets in Resources */,
-				3BAAFA8F27353958008D6041 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -137,23 +210,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3BAAFA8C27353958008D6041 /* ViewController.swift in Sources */,
+				3B09930D27FDDD6C0041013E /* AudioReceiverDelegate.swift in Sources */,
+				3BAAFA8C27353958008D6041 /* RecordViewController.swift in Sources */,
 				3BAAFA8827353958008D6041 /* AppDelegate.swift in Sources */,
+				3B838C6228001DFA005271FA /* DatasetProvider.swift in Sources */,
+				3BAAFA9C27353A53008D6041 /* RawAudioProviderAndWriter.swift in Sources */,
+				3B09930F27FDDD880041013E /* RawAudioDataReceiverDelegate.swift in Sources */,
+				3B09930427FCDF3B0041013E /* CGPoint.swift in Sources */,
 				3BAAFA8A27353958008D6041 /* SceneDelegate.swift in Sources */,
+				3B3B423327446872004510DE /* WaveFormView.swift in Sources */,
+				3B09930127FCD39A0041013E /* WaveFormDisplayable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		3BAAFA8D27353958008D6041 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				3BAAFA8E27353958008D6041 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		3BAAFA9227353959008D6041 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -293,7 +365,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = Kek.RightWaveForm;
+				PRODUCT_BUNDLE_IDENTIFIER = Ilya.Cherkasov.RightWaveForm;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -312,7 +384,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = Kek.RightWaveForm;
+				PRODUCT_BUNDLE_IDENTIFIER = Ilya.Cherkasov.RightWaveForm;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
