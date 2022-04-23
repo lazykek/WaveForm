@@ -67,21 +67,25 @@ private extension WaveFormView {
             let max = dataset.max(),
             max > 0 else {
                 return []
-            }
+            } //Выбираем максимальное значение среди данных для масштабирования
         
-        var colomnsRect = [CGRect]()
-        let distanceBetweenOriginsOnX = frame.width / CGFloat(dataset.count)
+        var colomnsRect = [CGRect]() //сюда будем записывать результаты вычисления размеров и origin наших столбцов
+        let distanceBetweenOriginsOnX = frame.width / CGFloat(dataset.count) //Вычисляем расстояние между origin двух соседних столбцов
         let heightRatio = frame.height / max
         
         dataset.forEach {
+            // Высоту получаем путём умножения соответствующего значения из dataset на коэффициент масштабирования
             let height = $0 * heightRatio
             let previousColomnOrigin = colomnsRect.last?.origin ?? .zero
             let size = CGSize(
+                //Ширину столбца получаем как расстояние между origin двух соседних столбцов, умноженное на коэффициент, который меньше единицы.
+                //Чем больше коэффициент, тем жирнее будут столбцы.
                 width: distanceBetweenOriginsOnX * constants.widthRatio,
                 height: height
             )
             colomnsRect.append(
                 CGRect(
+                    //Origin текущего столба получаем сдвигом origin предыдущего на его ширину
                     origin: previousColomnOrigin.moveBy(x: distanceBetweenOriginsOnX),
                     size: size
                 )

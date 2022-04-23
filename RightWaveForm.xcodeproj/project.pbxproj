@@ -13,6 +13,7 @@
 		3B09930F27FDDD880041013E /* RawAudioDataReceiverDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B09930E27FDDD880041013E /* RawAudioDataReceiverDelegate.swift */; };
 		3B3B423327446872004510DE /* WaveFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B3B423227446872004510DE /* WaveFormView.swift */; };
 		3B838C6228001DFA005271FA /* DatasetProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B838C6128001DFA005271FA /* DatasetProvider.swift */; };
+		3B9807A7281D4A860083777C /* UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B9807A6281D4A860083777C /* UIButton.swift */; };
 		3BAAFA8827353958008D6041 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BAAFA8727353958008D6041 /* AppDelegate.swift */; };
 		3BAAFA8A27353958008D6041 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BAAFA8927353958008D6041 /* SceneDelegate.swift */; };
 		3BAAFA8C27353958008D6041 /* RecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BAAFA8B27353958008D6041 /* RecordViewController.swift */; };
@@ -28,6 +29,7 @@
 		3B09930E27FDDD880041013E /* RawAudioDataReceiverDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RawAudioDataReceiverDelegate.swift; sourceTree = "<group>"; };
 		3B3B423227446872004510DE /* WaveFormView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaveFormView.swift; sourceTree = "<group>"; };
 		3B838C6128001DFA005271FA /* DatasetProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatasetProvider.swift; sourceTree = "<group>"; };
+		3B9807A6281D4A860083777C /* UIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButton.swift; sourceTree = "<group>"; };
 		3BAAFA8427353958008D6041 /* RightWaveForm.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RightWaveForm.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3BAAFA8727353958008D6041 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3BAAFA8927353958008D6041 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -53,6 +55,7 @@
 			isa = PBXGroup;
 			children = (
 				3B09930327FCDF3B0041013E /* CGPoint.swift */,
+				3B9807A6281D4A860083777C /* UIButton.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -218,6 +221,7 @@
 				3B09930F27FDDD880041013E /* RawAudioDataReceiverDelegate.swift in Sources */,
 				3B09930427FCDF3B0041013E /* CGPoint.swift in Sources */,
 				3BAAFA8A27353958008D6041 /* SceneDelegate.swift in Sources */,
+				3B9807A7281D4A860083777C /* UIButton.swift in Sources */,
 				3B3B423327446872004510DE /* WaveFormView.swift in Sources */,
 				3B09930127FCD39A0041013E /* WaveFormDisplayable.swift in Sources */,
 			);

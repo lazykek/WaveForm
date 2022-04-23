@@ -10,5 +10,6 @@ import Foundation
 protocol AudioReceiverDelegate: AnyObject {
     
     func recordURLOutput(_ url: URL)
+    func noMicrophoneAccess()
     
 }

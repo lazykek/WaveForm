@@ -23,11 +23,29 @@ final class RawAudioProviderAndWriter: NSObject {
     // MARK: - Private properties
     
     private let constants = Constants()
-    private let captureSession = AVCaptureSession() ///Управляет захватом данных с микрофона
-    private let audioOutput = AVCaptureAudioDataOutput() ///Осуществляет вывод данных и доступ к буферам
-    private var writer: AVAssetWriter? ///Пишет данные в нужный нам формат
-    private var writerInput: AVAssetWriterInput? ///Добавляет новые данные аудио данные к уже существующим
-    private var fileURL: URL?
+    private let captureSession = AVCaptureSession()
+    private let audioOutput = AVCaptureAudioDataOutput()
+    
+    let outputSettings: [String : Any] = [
+        AVFormatIDKey: UInt(kAudioFormatLinearPCM),
+        AVSampleRateKey: 44100,
+        AVNumberOfChannelsKey: 2,
+        AVLinearPCMBitDepthKey: 16,
+        AVLinearPCMIsNonInterleaved: false,
+        AVLinearPCMIsFloatKey: false,
+        AVLinearPCMIsBigEndianKey: false
+    ]
+    private var writer: AVAssetWriter?
+    private lazy var writerInput = AVAssetWriterInput(
+        mediaType: AVMediaType.audio,
+        outputSettings: outputSettings
+    )
+
+    private lazy var fileURL = FileManager.default.urls(
+        for: .documentDirectory,
+        in: .userDomainMask
+    )[0].appendingPathComponent(UUID().uuidString)
+    
     private var averageValuesBuffer = [Float]()
     
     private lazy var captureQueue = DispatchQueue(
@@ -48,8 +66,7 @@ final class RawAudioProviderAndWriter: NSObject {
     override init() {
         super.init()
         configureWriter()
-        //startToConfigureCaptureSession()
-        configureCaptureSession()
+        startToConfigureCaptureSession()
         configureAudioOutput()
     }
     
@@ -60,23 +77,26 @@ final class RawAudioProviderAndWriter: NSObject {
     // MARK: - Functions
     
     func startRunning() {
-        sessionQueue.async {
-            if AVCaptureDevice.authorizationStatus(for: .audio) == .authorized {
-                self.captureSession.startRunning()
+        checkMicrophoneAccessPermission { [weak self] isAllowed in
+            if !isAllowed {
+                self?.audioReceiverDelegate?.noMicrophoneAccess()
+                return
+            }
+            self?.sessionQueue.async {
+                self?.captureSession.startRunning()
             }
         }
     }
     
     func stopRunning() {
         sessionQueue.async { [weak self] in
-            if AVCaptureDevice.authorizationStatus(for: .audio) == .authorized {
-                self?.captureSession.stopRunning()
-                self?.writer?.finishWriting {
-                    guard let url = self?.fileURL else {
-                        return
-                    }
-                    self?.audioReceiverDelegate?.recordURLOutput(url)
+            self?.captureSession.stopRunning()
+            self?.writerInput.markAsFinished()
+            self?.writer?.finishWriting {
+                guard let url = self?.fileURL else {
+                    return
                 }
+                self?.audioReceiverDelegate?.recordURLOutput(url)
             }
         }
     }
@@ -91,20 +111,20 @@ extension RawAudioProviderAndWriter: AVCaptureAudioDataOutputSampleBufferDelegat
                        didOutput sampleBuffer: CMSampleBuffer,
                        from connection: AVCaptureConnection) {
         
-        writerInput?.append(sampleBuffer)
+        writerInput.append(sampleBuffer)
 
         var audioBufferList = AudioBufferList()
         var blockBuffer: CMBlockBuffer?
         
         CMSampleBufferGetAudioBufferListWithRetainedBlockBuffer(
-            sampleBuffer, ///sampleBuffer - буффер, о котором и говорилось в докладе
-            bufferListSizeNeededOut: nil, ///можем положить указатель на целое число, которое задает размер AudioBufferList
-            bufferListOut: &audioBufferList, ///кладём указатель на AudioBufferList, куда и будут записываться данные
+            sampleBuffer,
+            bufferListSizeNeededOut: nil,
+            bufferListOut: &audioBufferList,
             bufferListSize: MemoryLayout.stride(ofValue: audioBufferList),
             blockBufferAllocator: nil,
             blockBufferMemoryAllocator: nil,
             flags: kCMSampleBufferFlag_AudioBufferList_Assure16ByteAlignment,
-            blockBufferOut: &blockBuffer ///необходим, чтобы функция отрабатывала
+            blockBufferOut: &blockBuffer
         )
                 
         guard let data = audioBufferList.mBuffers.mData else {
@@ -126,9 +146,12 @@ extension RawAudioProviderAndWriter: AVCaptureAudioDataOutputSampleBufferDelegat
 private extension RawAudioProviderAndWriter {
     
     func startToConfigureCaptureSession() {
+        sessionQueue.suspend()
         checkMicrophoneAccessPermission { [weak self] isAllowed in
-            self?.configureCaptureSession()
-            self?.sessionQueue.resume()
+            if isAllowed {
+                self?.configureCaptureSession()
+                self?.sessionQueue.resume()
+            }
         }
     }
     
@@ -144,7 +167,6 @@ private extension RawAudioProviderAndWriter {
         case .authorized:
             completion(true)
         case .notDetermined:
-            sessionQueue.suspend()
             AVCaptureDevice.requestAccess(for: .audio) { granted in
                 completion(granted)
             }
@@ -155,13 +177,6 @@ private extension RawAudioProviderAndWriter {
     
     func configureCaptureSession() {
         captureSession.beginConfiguration()
-        
-        if captureSession.canAddOutput(audioOutput) {
-            captureSession.addOutput(audioOutput)
-        } else {
-            print("Can't add `audioOutput`.")
-            return
-        }
         
         guard
             let microphone = AVCaptureDevice.default(
@@ -176,33 +191,26 @@ private extension RawAudioProviderAndWriter {
         if captureSession.canAddInput(microphoneInput) {
             captureSession.addInput(microphoneInput)
         }
+        
+        if captureSession.canAddOutput(audioOutput) {
+            captureSession.addOutput(audioOutput)
+        } else {
+            print("Can't add `audioOutput`.")
+            return
+        }
+        
         captureSession.commitConfiguration()
     }
     
     func configureWriter() {
-        fileURL = FileManager.default.urls(
-            for: .documentDirectory,
-            in: .userDomainMask
-        )[0].appendingPathComponent(UUID().uuidString)
-
-        let outputSettings: [String : Any] = [
-            AVFormatIDKey: UInt(kAudioFormatLinearPCM),
-            AVSampleRateKey: 44100,
-            AVNumberOfChannelsKey: 2,
-            AVLinearPCMBitDepthKey: 16,
-            AVLinearPCMIsNonInterleaved: false,
-            AVLinearPCMIsFloatKey: false,
-            AVLinearPCMIsBigEndianKey: false
-        ]
-        
         writerInput = AVAssetWriterInput(
             mediaType: AVMediaType.audio,
             outputSettings: outputSettings
         )
         
         do {
-            writer = try AVAssetWriter(outputURL: fileURL!, fileType: .wav)
-            writer?.add(writerInput!)
+            writer = try AVAssetWriter(outputURL: fileURL, fileType: .wav)
+            writer?.add(writerInput)
             self.writer?.startWriting()
             self.writer?.startSession(atSourceTime: .zero)
         } catch let error {

@@ -19,6 +19,11 @@ final class RecordViewController: UIViewController {
         let defaultSpacing: CGFloat = 10.0
         let defaultControllButtonHeght: CGFloat = 50.0
         let defaultWaveFormHeight: CGFloat = 200.0
+        let noMicrophoneAccessTitle = "Микрофон недоступен"
+        let noMicrophoneAccessMessage = "Разрешите доступ к микрофону в настройках и перезапустите приложение"
+        let recordButtonTitle = "Record"
+        let stopButtonTitle = "Stop"
+        let playButtonTitle = "Play"
         
     }
     
@@ -42,6 +47,26 @@ final class RecordViewController: UIViewController {
     private lazy var waveForm: WaveFormDisplayable = getWaveForm()
     private lazy var contolButtons = getControlButtonsStack()
     
+    private lazy var recordButton = makeButton(
+        withTitle: constants.recordButtonTitle,
+        color: .blue,
+        action: #selector(record)
+    )
+    
+    private lazy var stopButton = makeButton(
+        withTitle: constants.stopButtonTitle,
+        color: .red,
+        action: #selector(stop)
+    )
+    
+    private lazy var playButton = makeButton(
+        withTitle: constants.playButtonTitle,
+        color: .systemGreen,
+        action: #selector(play)
+    )
+    
+    // MARK: - UIViewController
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -52,16 +77,28 @@ final class RecordViewController: UIViewController {
         
         audioSpectrogram.audioReceiverDelegate = self
         audioSpectrogram.rawAudioDataReceiverDelegate = self
+        
+        stopButton.turnOff()
+        playButton.turnOff()
     }
     
 }
 
+// MARK: - AudioReceiverDelegate
+
 extension RecordViewController: AudioReceiverDelegate {
-    
-    // MARK: - AudioReceiverDelegate
-    
+        
     func recordURLOutput(_ url: URL) {
         recordingUrl = url
+    }
+    
+    func noMicrophoneAccess() {
+        let alert = UIAlertController(
+            title: constants.noMicrophoneAccessTitle,
+            message: constants.noMicrophoneAccessMessage,
+            preferredStyle: .alert
+        )
+        present(alert, animated: true)
     }
 
 }
@@ -79,10 +116,10 @@ extension RecordViewController: RawAudioDataReceiverDelegate {
     
 }
 
+// MARK: - Private functions
+
 private extension RecordViewController {
-    
-    // MARK: - Private functions
-    
+        
     func getWaveForm() -> WaveFormDisplayable {
         let waveForm = WaveFormView()
         waveForm.backgroundColor = .lightGray
@@ -106,21 +143,7 @@ private extension RecordViewController {
     
     func getControlButtonsStack() -> UIStackView {
         let stackView = UIStackView(arrangedSubviews: [
-            makeButton(
-                withTitle: "Record",
-                color: .blue,
-                action: #selector(record)
-            ),
-            makeButton(
-                withTitle: "Stop",
-                color: .red,
-                action: #selector(stop)
-            ),
-            makeButton(
-                withTitle: "Play",
-                color: .systemGreen,
-                action: #selector(play)
-            )
+            recordButton, stopButton, playButton
         ])
         stackView.axis = .vertical
         stackView.distribution = .fillEqually
@@ -174,10 +197,14 @@ private extension RecordViewController {
     
     @objc func record() {
         audioSpectrogram.startRunning()
+        recordButton.turnOff()
+        stopButton.turnOn()
     }
     
     @objc func stop() {
         audioSpectrogram.stopRunning()
+        stopButton.turnOff()
+        playButton.turnOn()
     }
     
     @objc func play() {
